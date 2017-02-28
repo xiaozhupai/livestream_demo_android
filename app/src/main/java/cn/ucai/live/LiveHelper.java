@@ -52,6 +52,7 @@ import cn.ucai.live.data.local.LiveDBManager;
 import cn.ucai.live.data.local.UserDao;
 import cn.ucai.live.data.model.Result;
 import cn.ucai.live.ui.activity.ChatActivity;
+import cn.ucai.live.ui.activity.LoginActivity;
 import cn.ucai.live.ui.activity.MainActivity;
 import cn.ucai.live.utils.L;
 import cn.ucai.live.utils.OkHttpUtils;
@@ -1131,5 +1132,29 @@ public class LiveHelper {
         ArrayList<User> mList = new ArrayList<User>();
         mList.addAll(appContactList.values());
         demoModel.saveAppContactList(mList);
+    }
+    public void asyncGetCurrentUserInfo(Activity activity) {
+        NetDao.getUserInfoByUsername(activity, EMClient.getInstance().getCurrentUser(), new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                L.e("UserProfileManager", "s==>" + s);
+                if (s != null) {
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
+                    if (result != null && result.isRetMsg()) {
+                        User user = (User) result.getRetData();
+                        if (user != null) {
+                            LiveHelper.getInstance().saveAppContact(user);
+                            PreferenceManager.getInstance().setCurrentUserNick(user.getMUserNick());
+                            PreferenceManager.getInstance().setCurrentUserAvatar(user.getAvatar());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                L.e("UserProfileManager", "error==>" + error);
+            }
+        });
     }
 }
