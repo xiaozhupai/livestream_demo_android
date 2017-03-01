@@ -81,7 +81,7 @@ public class RegisterActivity extends BaseActivity {
                     CommonUtils.showShortToast(R.string.Confirm_password_cannot_be_empty);
                     etConfirmetPassword.requestFocus();
                     return;
-                } else if (!password.equals(MD5.getMessageDigest(confirm_pwd))) {
+                } else if (!password.equals(confirm_pwd)) {
                     CommonUtils.showShortToast(R.string.Two_input_password);
                     return;
                 }
@@ -102,7 +102,7 @@ public class RegisterActivity extends BaseActivity {
         NetDao.register(this, username, usernick, MD5.getMessageDigest(password), new OkHttpUtils.OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
-                L.e(TAG, "register,s===>" + s);
+                L.e(TAG, "register,s======================>" + s);
                 if (s != null) {
                     Result result = ResultUtils.getResultFromJson(s, null);
                     if (result != null) {
@@ -128,6 +128,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onError(String error) {
+                L.e(TAG,"error===================="+error);
                 pd.dismiss();
                 CommonUtils.showShortToast(R.string.Registration_failed);
             }
