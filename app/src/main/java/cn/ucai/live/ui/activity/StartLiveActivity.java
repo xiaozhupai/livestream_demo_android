@@ -96,11 +96,21 @@ public class StartLiveActivity extends LiveBaseActivity
             userAvatar);
     EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(),usernameView);
 
+    String id=getIntent().getStringExtra("liveId");
+    if (id!=null && !id.equals("")){
+      liveId=id;
+      chatroomId=id;
+      initEnv();
+    }else {
 //    liveId = TestDataRepository.getLiveRoomId(EMClient.getInstance().getCurrentUser());
 //    chatroomId = TestDataRepository.getChatRoomId(EMClient.getInstance().getCurrentUser());
 //    anchorId = EMClient.getInstance().getCurrentUser();
 //    usernameView.setText(anchorId);
-    initEnv();
+      pd=new ProgressDialog(StartLiveActivity.this);
+      pd.setMessage("创建直播...");
+      pd.show();
+      createLive();
+    }
   }
 
   public void initEnv() {
@@ -179,21 +189,14 @@ public class StartLiveActivity extends LiveBaseActivity
    * 开始直播
    */
   @OnClick(R.id.btn_start) void startLive() {
-    pd=new ProgressDialog(StartLiveActivity.this);
-    pd.setMessage("创建直播...");
-    pd.show();
-    createLive();
+
     //demo为了测试方便，只有指定的账号才能开启直播
     if (liveId == null) {
-//      String[] anchorIds = TestDataRepository.anchorIds;
-//      StringBuilder sb = new StringBuilder();
-//      for (int i = 0; i < anchorIds.length; i++) {
-//        sb.append(anchorIds[i]);
-//        if (i != (anchorIds.length - 1)) sb.append(",");
-//      }
-//      new EaseAlertDialog(this, "demo中只有" + sb.toString() + "这几个账户才能开启直播").show();
+      CommonUtils.showShortToast("获取直播数据失败");
+      L.e(TAG,"id is null");
       return;
     }
+    startLiveByChatRoom();
   }
   private void startLiveByChatRoom(){
     startContainer.setVisibility(View.INVISIBLE);
@@ -225,12 +228,12 @@ public class StartLiveActivity extends LiveBaseActivity
         public void onSuccess(String s) {
           boolean success=false;
           if (s != null) {
-            List<String> ids= ResultUtils.getEMRResultFromJson(s,String.class);
-            if (ids!=null && ids.size()>0){
+            String id= ResultUtils.getEMRResultFromJson(s);
+            if (id!=null){
               success=true;
-              L.e("startLive","id======"+ids.get(0));
-              initLive(ids.get(0));
-              startLiveByChatRoom();
+              L.e("startLive","id======"+id);
+              initLive(id);
+//              startLiveByChatRoom();
             }
           }
           if (!success){
