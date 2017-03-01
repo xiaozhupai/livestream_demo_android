@@ -29,7 +29,9 @@ import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.controller.EaseUI;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
+import com.hyphenate.easeui.widget.EaseImageView;
 import com.ucloud.common.util.DeviceUtils;
 import com.ucloud.live.UEasyStreaming;
 import com.ucloud.live.UStreamingProfile;
@@ -45,6 +47,7 @@ public class StartLiveActivity extends LiveBaseActivity
   @BindView(R.id.start_container) RelativeLayout startContainer;
   @BindView(R.id.countdown_txtv) TextView countdownView;
   @BindView(R.id.tv_username) TextView usernameView;
+  @BindView(R.id.eiv_avatar)EaseImageView userAvatar;
   @BindView(R.id.btn_start) Button startBtn;
   @BindView(R.id.finish_frame) ViewStub liveEndLayout;
   @BindView(R.id.cover_image) ImageView coverImage;
@@ -80,6 +83,9 @@ public class StartLiveActivity extends LiveBaseActivity
   @Override protected void onActivityCreate(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.activity_start_live);
     ButterKnife.bind(this);
+    EaseUserUtils.setUserAvatar(StartLiveActivity.this,EMClient.getInstance().getCurrentUser(),
+            userAvatar);
+    EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(),usernameView);
 
     liveId = TestDataRepository.getLiveRoomId(EMClient.getInstance().getCurrentUser());
     chatroomId = TestDataRepository.getChatRoomId(EMClient.getInstance().getCurrentUser());

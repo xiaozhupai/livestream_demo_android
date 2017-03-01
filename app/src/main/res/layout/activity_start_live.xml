@@ -5,7 +5,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.easemob.livedemo.ui.activity.StartLiveActivity"
+    tools:context="cn.ucai.live.ui.activity.StartLiveActivity"
     >
 
   <com.ucloud.live.widget.UAspectFrameLayout
@@ -32,6 +32,7 @@
         android:gravity="center_vertical"
         >
       <com.hyphenate.easeui.widget.EaseImageView
+          android:id="@+id/eiv_avatar"
           android:layout_width="30dp"
           android:layout_height="30dp"
           app:ease_shape_type="round"
@@ -188,18 +189,20 @@
       android:layout_alignParentBottom="true"
       ></RelativeLayout>
 
-  <ImageView
-      android:id="@+id/cover_image"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:visibility="invisible"
-      android:scaleType="fitXY"
-      />
-
   <ViewStub
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/finish_frame"
       android:layout="@layout/live_finish_layout"
       />
+
+  <ImageView
+      android:id="@+id/cover_image"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="invisible"
+      android:scaleType="fitXY"
+      android:layout_below="@+id/countdown_txtv"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentStart="true" />
 </RelativeLayout>
