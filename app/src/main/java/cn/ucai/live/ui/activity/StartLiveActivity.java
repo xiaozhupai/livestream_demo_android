@@ -232,8 +232,9 @@ public class StartLiveActivity extends LiveBaseActivity
             if (id!=null){
               success=true;
               L.e("startLive","id======"+id);
-              initLive(id);
-//              startLiveByChatRoom();
+//              initLive(id);
+              chatroomId=id;
+              startLiveByChatRoom();
             }
           }
           if (!success){
@@ -253,12 +254,12 @@ public class StartLiveActivity extends LiveBaseActivity
     }
   }
 
-  private void initLive(String id) {
-    liveId = id;
-    chatroomId = id;
-    initEnv();
-
-  }
+//  private void initLive(String id) {
+//    liveId = id;
+//    chatroomId = id;
+//    initEnv();
+//
+//  }
 
   /**
    * 关闭直播显示直播成果
@@ -269,7 +270,22 @@ public class StartLiveActivity extends LiveBaseActivity
       finish();
       return;
     }
+    removeLive();
     showConfirmCloseLayout();
+  }
+
+  private void removeLive() {
+      NetDao.removeLive(StartLiveActivity.this, chatroomId, new OnCompleteListener<String>() {
+        @Override
+        public void onSuccess(String result) {
+
+        }
+
+        @Override
+        public void onError(String error) {
+
+        }
+      });
   }
 
   @OnClick(R.id.img_bt_switch_voice) void toggleMicrophone(){
