@@ -101,21 +101,25 @@ public class StartLiveActivity extends LiveBaseActivity
             userAvatar);
     EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(),usernameView);
 
-    String id=getIntent().getStringExtra("liveId");
-    if (id!=null && !id.equals("")){
-      liveId=id;
-      chatroomId=id;
-      initEnv();
+    LiveRoom liveRoom=getIntent().getParcelableExtra("liveRoom");
+    L.e(TAG,"getIntent,liveRoom=========="+liveRoom);
+    if (liveRoom!=null ){
+      liveId=liveRoom.getId();
+      chatroomId=liveRoom.getChatroomId();
     }else {
+      liveId=EMClient.getInstance().getCurrentUser();
 //    liveId = TestDataRepository.getLiveRoomId(EMClient.getInstance().getCurrentUser());
 //    chatroomId = TestDataRepository.getChatRoomId(EMClient.getInstance().getCurrentUser());
 //    anchorId = EMClient.getInstance().getCurrentUser();
 //    usernameView.setText(anchorId);
-      pd=new ProgressDialog(StartLiveActivity.this);
-      pd.setMessage("创建直播...");
-      pd.show();
-      createLive();
+
+//      pd=new ProgressDialog(StartLiveActivity.this);
+//      pd.setMessage("创建直播...");
+//      pd.show();
+
+//      createLive();
     }
+    initEnv();
   }
 
   public void initEnv() {
