@@ -119,7 +119,7 @@ public class ResultUtils {
         try {
             JSONObject jsonObject=new JSONObject(jsonStr);
             if (!jsonObject.isNull("data")){
-                JSONArray array=jsonObject.getJSONArray("data");
+                JSONObject data=jsonObject.getJSONObject("data");
                 if (!data.isNull("id")){
                     String id=data.getString("id");
                     return id;
