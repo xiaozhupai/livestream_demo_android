@@ -14,13 +14,14 @@
       android:gravity="center_horizontal"
       >
     <com.hyphenate.easeui.widget.EaseImageView
+        android:id="@+id/finish_eiv_avatar"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ease_default_avatar"
         android:layout_marginTop="100dp"
         />
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/finish_tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="username"
@@ -37,6 +38,7 @@
         />
     <TextView
         style="@style/LiveEndTextStyle"
+        android:id="@+id/finish_show_time"
         android:text="32:21"
         android:layout_marginTop="5dp"
         />
