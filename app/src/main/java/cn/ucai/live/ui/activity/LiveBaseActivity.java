@@ -504,11 +504,13 @@ public abstract class LiveBaseActivity extends BaseActivity {
           showUserDetailsDialog(namelist.get(position));
         }
       });
+
+      EaseUserUtils.setAppUserAvatar(context,namelist.get(position),holder.Avatar);
       //暂时使用测试数据
-      Glide.with(context)
-          .load(avatarRepository.getAvatar())
-          .placeholder(R.drawable.ease_default_avatar)
-          .into(holder.Avatar);
+//      Glide.with(context)
+//          .load(avatarRepository.getAvatar())
+//          .placeholder(R.drawable.ease_default_avatar)
+//          .into(holder.Avatar);
     }
 
     @Override public int getItemCount() {
