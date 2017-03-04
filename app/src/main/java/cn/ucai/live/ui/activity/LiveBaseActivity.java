@@ -110,6 +110,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
         leftGiftView.setVisibility(View.VISIBLE);
         leftGiftView.setAvatar(message.getFrom());
         leftGiftView.setName(message.getStringAttribute(I.User.NICK,message.getFrom()));
+        leftGiftView.setGift(message.getIntAttribute(LiveConstants.CMD_GIFT,0));
         leftGiftView.setTranslationY(0);
         ViewAnimator.animate(leftGiftView)
             .alpha(0, 1)
@@ -152,6 +153,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
         L.e(TAG,"showGift2Derect,username========="+message.getFrom()+",nick======="+nick);
         leftGiftView2.setVisibility(View.VISIBLE);
         leftGiftView2.setAvatar(message.getFrom());
+        leftGiftView2.setGift(message.getIntAttribute(LiveConstants.CMD_GIFT,0));
         leftGiftView2.setName(message.getStringAttribute(I.User.NICK,message.getFrom()));
         leftGiftView2.setTranslationY(0);
         ViewAnimator.animate(leftGiftView2)
@@ -443,9 +445,17 @@ public abstract class LiveBaseActivity extends BaseActivity {
   @OnClick(R.id.present_image) void onPresentImageClick() {
     final RoomGiftsListDialog dialog =
             RoomGiftsListDialog.newInstance();
+    dialog.setGiftOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        int id= (int) view.getTag();
+        sendGiftMsg(dialog,id);
+      }
+    });
     dialog.show(getSupportFragmentManager(), "RoomGiftsListDialog");
   }
-  private void sentGiftMsg(){
+  private void sendGiftMsg(RoomGiftsListDialog dialog,int id){
+    dialog.dismiss();
     User user=EaseUserUtils.getAppUserInfo(EMClient.getInstance().getCurrentUser());
     L.e(TAG,"send present , user============"+user);
     EMMessage message = EMMessage.createSendMessage(EMMessage.Type.CMD);
@@ -454,6 +464,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
     message.addBody(cmdMessageBody);
     message.setAttribute(I.User.NICK,
             EaseUserUtils.getAppUserInfo(EMClient.getInstance().getCurrentUser()).getMUserNick());
+    message.setAttribute(LiveConstants.CMD_GIFT,id);
     message.setChatType(EMMessage.ChatType.ChatRoom);
     EMClient.getInstance().chatManager().sendMessage(message);
     showLeftGiftVeiw(message);
