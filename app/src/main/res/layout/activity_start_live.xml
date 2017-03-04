@@ -18,7 +18,7 @@
 
   </com.ucloud.live.widget.UAspectFrameLayout>
 
-<!--  android:background="@drawable/live_title_gradient"-->
+  <!--  android:background="@drawable/live_title_gradient"-->
   <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"
       android:background="@android:color/transparent"
@@ -113,7 +113,7 @@
       android:visibility="gone"
       />
 
-  <com.easemob.livedemo.ui.widget.RoomMessagesView
+  <cn.ucai.live.ui.widget.RoomMessagesView
       android:id="@+id/message_view"
       android:layout_width="match_parent"
       android:layout_height="174dp"
@@ -121,7 +121,7 @@
       android:visibility="invisible"
       />
 
-  <com.easemob.livedemo.ui.widget.BarrageLayout
+  <cn.ucai.live.ui.widget.BarrageLayout
       android:id="@+id/barrage_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
       android:layout_marginBottom="10dp"
       />
 
-  <com.easemob.livedemo.ui.widget.PeriscopeLayout
+  <cn.ucai.live.ui.widget.PeriscopeLayout
       android:id="@+id/periscope_layout"
       android:layout_width="150dp"
       android:layout_height="190dp"
@@ -138,7 +138,7 @@
       android:layout_marginBottom="42dp"
       />
 
-  <com.easemob.livedemo.ui.widget.LiveLeftGiftView
+  <cn.ucai.live.ui.widget.LiveLeftGiftView
       android:id="@+id/left_gift_view1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
       android:layout_marginBottom="4dp"
       android:visibility="invisible"
       />
-  <com.easemob.livedemo.ui.widget.LiveLeftGiftView
+  <cn.ucai.live.ui.widget.LiveLeftGiftView
       android:id="@+id/left_gift_view2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -187,14 +187,9 @@
       android:layout_height="300dp"
       android:id="@+id/message_container"
       android:layout_alignParentBottom="true"
-      ></RelativeLayout>
+      >
 
-  <ViewStub
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:id="@+id/finish_frame"
-      android:layout="@layout/live_finish_layout"
-      />
+  </RelativeLayout>
 
   <ImageView
       android:id="@+id/cover_image"
@@ -202,7 +197,12 @@
       android:layout_height="match_parent"
       android:visibility="invisible"
       android:scaleType="fitXY"
-      android:layout_below="@+id/countdown_txtv"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentStart="true" />
+      />
+
+  <ViewStub
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/finish_frame"
+      android:layout="@layout/live_finish_layout"
+      />
 </RelativeLayout>

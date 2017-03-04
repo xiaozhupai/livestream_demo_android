@@ -59,7 +59,6 @@ public class StartLiveActivity extends LiveBaseActivity
   @BindView(R.id.countdown_txtv) TextView countdownView;
   @BindView(R.id.tv_username) TextView usernameView;
   @BindView(R.id.eiv_avatar)EaseImageView userAvatar;
-  @BindView(R.id.finish_show_time) TextView showTimeView;
   @BindView(R.id.btn_start) Button startBtn;
   @BindView(R.id.finish_frame) ViewStub liveEndLayout;
   @BindView(R.id.cover_image) ImageView coverImage;
@@ -80,6 +79,8 @@ public class StartLiveActivity extends LiveBaseActivity
   UEasyStreaming.UEncodingType encodingType;
   ProgressDialog pd;
 
+  TextView showTimeView;
+
   boolean isStarted;
   long startTime;
 
@@ -97,6 +98,7 @@ public class StartLiveActivity extends LiveBaseActivity
   @Override protected void onActivityCreate(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.activity_start_live);
     ButterKnife.bind(this);
+    showTimeView= (TextView) findViewById(R.id.finish_show_time);
     EaseUserUtils.setUserAvatar(StartLiveActivity.this,EMClient.getInstance().getCurrentUser(),
             userAvatar);
     EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(),usernameView);
@@ -330,6 +332,7 @@ public class StartLiveActivity extends LiveBaseActivity
     EaseImageView userAvatar= (EaseImageView) view.findViewById(R.id.finish_eiv_avatar);
     EaseUserUtils.setAppUserAvatar(StartLiveActivity.this,EMClient.getInstance().getCurrentUser(),userAvatar);
     EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(),nameView);
+
     showTimeView.setText(time);
 //    usernameView.setText(EMClient.getInstance().getCurrentUser());
     closeConfirmBtn.setOnClickListener(new View.OnClickListener() {

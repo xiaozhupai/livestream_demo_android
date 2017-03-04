@@ -78,7 +78,7 @@ public class EaseUserUtils {
     }
 
     public static String getGroupAvatarPath(String hxid){
-        String path = "http://101.251.196.90:8000/SuperWeChatServerV2.0/downloadAvatar?name_or_hxid="
+        String path = "http://101.251.196.91:8888/SuperWeChatServerV2.0/downloadAvatar?name_or_hxid="
                 +hxid+"&avatarType=user_avatar&m_avatar_suffix=.jpg";
         return path;
     }

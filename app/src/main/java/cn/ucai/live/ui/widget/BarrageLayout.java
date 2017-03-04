@@ -97,7 +97,6 @@ public class BarrageLayout extends LinearLayout {
         EaseImageView avatar= (EaseImageView) barrageView.findViewById(R.id.avatar);
         TextView contentView = (TextView) barrageView.findViewById(R.id.content);
         EaseUserUtils.setAppUserAvatar(getContext(),username,avatar);
-        nameView.setText(username);
         nameView.setText(usernick);
         contentView.setText(msgContent);
         return barrageView;

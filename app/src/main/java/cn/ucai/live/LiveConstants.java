@@ -18,5 +18,5 @@ public class LiveConstants extends EaseConstant{
     public static final String CHAT_ROBOT = "item_robots";
     public static final String MESSAGE_ATTR_ROBOT_MSGTYPE = "msgtype";
     public static final String ACTION_GROUP_CHANAGED = "action_group_changed";
-    public static final String ACTION_CONTACT_CHANAGED = "action_contact_changed";
+    public static final String ACTION_CONTACT_CHANAGED = "actionn_contact_changed";
 }
